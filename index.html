@@ -96,7 +96,7 @@
 						.then((res) => res.json())
 						.then((formData) => {
 							const iframe = document.getElementById('formIframe')
-							iframe.src = `http://localhost:3000?formData=${JSON.stringify(
+							iframe.src = `https://frontend-test-psi-coral.vercel.app?formData=${JSON.stringify(
 								formData
 							)}`
 						})
@@ -107,7 +107,7 @@
 			// Listen for messages from any iframes
 			window.addEventListener('message', function (event) {
 				// Verify origin for security
-				if (event.origin !== 'http://localhost:3000') {
+				if (event.origin !== 'https://frontend-test-psi-coral.vercel.app') {
 					return
 				}
 				console.log(event.data, 'event.data')

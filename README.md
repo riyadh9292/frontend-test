@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Frontdesk Bangladesh Limited Test Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The FormFrame component is a React component designed to render a dynamic form inside an iframe. It dynamically fetches field data from an API endpoint and allows users to submit the form. This README provides documentation on how to use the FormFrame component, its props, and usage examples.
 
-## Available Scripts
+## Technologies Used
 
-In the project directory, you can run:
+- React
+- JavaScript
+- HTML
+- CSS
 
-### `npm start`
+## Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Check out the live demo of the application [https://65cfa600a5c29806bc7c0c4a--legendary-babka-ddb9dc.netlify.app/](https://65cfa600a5c29806bc7c0c4a--legendary-babka-ddb9dc.netlify.app/).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js (version 16.13 or higher)
+- npm
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/riyadh9292/frontend-test.git
+cd frontend-test
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+### 1. Dynamic Form Rendering
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The project includes an index.html file located at the root of the project, which serves as the entry point.
+The index.html file fetches form field data from an API endpoint.
+Upon receiving the data, it dynamically sets the src attribute of an iframe embedded within the HTML page.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. React Application Integration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The iframe source points to a React application.
+The React application receives the form field data as query parameters.
+It generates a dynamic form based on the received data, allowing users to input and validate their information.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Form Submission and Data Communication
 
-## Learn More
+The React application handles form submissions, validating the input data.
+Upon successful validation, the application sends the form data back to the parent HTML page using the `window.parent.postMessage()` method.
+The HTML page listens for messages from the iframe and displays the returned form values in a modal.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. Modal Display
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After receiving the form data from the React application, the HTML page displays a modal.
+The modal contains the returned form values, providing users with feedback on their submitted information.
 
-### Code Splitting
+### 5. Integration Testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The project has been thoroughly tested to ensure seamless communication between the HTML page and the React application.
+Integration tests have been conducted to verify the functionality of form rendering, validation, submission, and data communication.
