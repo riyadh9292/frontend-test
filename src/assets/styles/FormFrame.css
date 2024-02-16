@@ -1,0 +1,94 @@
+.form-field {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	opacity: 0;
+	animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.animate-next {
+	animation: slideInRight 0.5s forwards;
+}
+
+@keyframes slideInRight {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	margin-left: 10px;
+}
+
+button i {
+	color: #333;
+	font-size: 24px;
+}
+
+button:focus {
+	outline: none;
+}
+.success-message {
+	color: green;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+/* Input field styles */
+input[type='text'],
+input[type='email'] {
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	outline: none;
+}
+
+/* Checkbox styles */
+.checkbox-container {
+	display: flex;
+	align-items: center;
+}
+
+.checkbox-container input[type='checkbox'] {
+	margin-right: 5px;
+}
+
+/* Select styles */
+select {
+	padding: 10px;
+	width: 150px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	appearance: none;
+	/* Remove default arrow */
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M7 10l5 5 5-5z' /%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	/* Add custom arrow */
+}
+
+/* Radio button styles */
+.radio-container {
+	display: flex;
+	align-items: center;
+}
+
+.radio-container input[type='radio'] {
+	margin-right: 5px;
+}

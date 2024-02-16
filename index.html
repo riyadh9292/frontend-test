@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Embedded React Application</title>
+		<style>
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+
+			.modal-content {
+				background-color: #fefefe;
+				margin: 20% auto;
+				padding: 20px;
+				border: 1px solid #888;
+				width: 80%;
+				max-width: 600px;
+				border-radius: 8px;
+			}
+
+			.close {
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center; /* Optional: Center content horizontally */
+				height: 100vh; /* Adjust to your desired height */
+			}
+
+			/* Button styles */
+			#openFormButton {
+				margin-bottom: 20px; /* Add spacing below the button */
+				padding: 10px 20px; /* Add padding to the button */
+				font-size: 16px; /* Adjust font size */
+				border: none;
+				background-color: #007bff; /* Blue color for button */
+				color: white;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s ease; /* Smooth transition on hover */
+			}
+
+			#openFormButton:hover {
+				background-color: #0056b3; /* Darker blue color on hover */
+			}
+
+			/* Iframe styles */
+			#formIframe {
+				border: none; /* Remove border from iframe */
+				width: 800px; /* Adjust width as needed */
+				height: 1000px; /* Adjust height as needed */
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<button id="openFormButton">Open Form</button>
+			<iframe id="formIframe" title="Embedded React Application"></iframe>
+		</div>
+		<!-- Modal HTML -->
+		<div id="formModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>Form Values</h2>
+				<div id="formValues"></div>
+			</div>
+		</div>
+
+		<script>
+			document
+				.getElementById('openFormButton')
+				.addEventListener('click', function () {
+					fetch('https://mocki.io/v1/77a3df71-02b1-4fb2-b3bc-d006652a36f7')
+						.then((res) => res.json())
+						.then((formData) => {
+							const iframe = document.getElementById('formIframe')
+							iframe.src = `http://localhost:3000?formData=${JSON.stringify(
+								formData
+							)}`
+						})
+						.catch((error) => {
+							console.error('Error fetching form field data:', error)
+						})
+				})
+			// Listen for messages from any iframes
+			window.addEventListener('message', function (event) {
+				// Verify origin for security
+				if (event.origin !== 'http://localhost:3000') {
+					return
+				}
+				console.log(event.data, 'event.data')
+				// Handle message from iframe
+				const { type, data } = event.data
+				if (type === 'formSubmissionResult') {
+					console.log('Form submission result received:', data)
+					// Display form values in modal
+					displayFormValues(data)
+				}
+			})
+			// Function to display form values in modal
+			function displayFormValues(formData) {
+				const modal = document.getElementById('formModal')
+				const formValuesContainer = document.getElementById('formValues')
+				formValuesContainer.innerHTML = ''
+
+				// Create a list of form values
+				const ul = document.createElement('ul')
+				for (const key in formData) {
+					if (formData.hasOwnProperty(key)) {
+						const li = document.createElement('li')
+						li.textContent = `${key}: ${formData[key]}`
+						ul.appendChild(li)
+					}
+				}
+				formValuesContainer.appendChild(ul)
+
+				// Show the modal
+				modal.style.display = 'block'
+
+				// Close modal when close button or outside the modal is clicked
+				const closeButton = document.getElementsByClassName('close')[0]
+				closeButton.onclick = function () {
+					modal.style.display = 'none'
+				}
+				window.onclick = function (event) {
+					if (event.target === modal) {
+						modal.style.display = 'none'
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
